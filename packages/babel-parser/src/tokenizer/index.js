@@ -448,9 +448,9 @@ export default class Tokenizer extends LocationParser {
       next === charCodes.dot &&
       this.input.charCodeAt(this.state.pos + 2) === charCodes.dot
     ) {
-      if (this.input.charCodeAt(this.state.pos + 3) === charCodes.dollarSign) {
+      if (this.input.charCodeAt(this.state.pos + 3) === charCodes.numberSign) {
         this.state.pos += 4;
-        this.finishToken(tt.ellipsisDollar);
+        this.finishToken(tt.ellipsisHash);
       } else {
         this.state.pos += 3;
         this.finishToken(tt.ellipsis);
