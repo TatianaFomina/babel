@@ -2139,3 +2139,22 @@ helpers.wrapRegExp = helper("7.2.6")`
     return _wrapRegExp.apply(this, arguments);
   }
 `;
+helpers.deepCopy = helper("7.0.0-beta.0")`
+  export default function _deepCopy(inObject) {
+    let outObject, value, key;
+
+    if (typeof inObject !== "object" || inObject === null) {
+      return inObject;
+    }
+
+    outObject = Array.isArray(inObject) ? [] : {}
+
+    for (key in inObject) {
+      value = inObject[key];
+
+      outObject[key] = _deepCopy(value);
+    }
+
+    return outObject;
+  }
+`;
