@@ -219,6 +219,7 @@ export default class LValParser extends NodeUtils {
   // Parses spread element.
 
   parseSpread(
+    isDeep = false,
     refExpressionErrors: ?ExpressionErrors,
     refNeedsArrowPos?: ?Pos,
   ): SpreadElement {
@@ -230,6 +231,7 @@ export default class LValParser extends NodeUtils {
       undefined,
       refNeedsArrowPos,
     );
+    node.deep = isDeep;
     return this.finishNode(node, "SpreadElement");
   }
 

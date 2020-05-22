@@ -528,6 +528,7 @@ export type LogicalOperator = "||" | "&&";
 export type SpreadElement = NodeBase & {
   type: "SpreadElement",
   argument: Expression,
+  deep: boolean,
 };
 
 export type MemberExpression = NodeBase & {

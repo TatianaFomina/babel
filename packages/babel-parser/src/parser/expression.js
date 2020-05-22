@@ -1586,7 +1586,7 @@ export default class ExpressionParser extends LValParser {
     let startPos;
     let startLoc;
 
-    if (this.match(tt.ellipsis)) {
+    if (this.match(tt.ellipsis) || this.match(tt.ellipsisDollar)) {
       if (decorators.length) this.unexpected();
       if (isPattern) {
         this.next();
@@ -1596,7 +1596,7 @@ export default class ExpressionParser extends LValParser {
         return this.finishNode(prop, "RestElement");
       }
 
-      return this.parseSpread();
+      return this.parseSpread(this.match(tt.ellipsisDollar));
     }
 
     if (decorators.length) {
@@ -2070,11 +2070,15 @@ export default class ExpressionParser extends LValParser {
     let elt;
     if (allowEmpty && this.match(tt.comma)) {
       elt = null;
-    } else if (this.match(tt.ellipsis)) {
+    } else if (this.match(tt.ellipsis) || this.match(tt.ellipsisDollar)) {
       const spreadNodeStartPos = this.state.start;
       const spreadNodeStartLoc = this.state.startLoc;
       elt = this.parseParenItem(
-        this.parseSpread(refExpressionErrors, refNeedsArrowPos),
+        this.parseSpread(
+          this.match(tt.ellipsisDollar),
+          refExpressionErrors,
+          refNeedsArrowPos,
+        ),
         spreadNodeStartPos,
         spreadNodeStartLoc,
       );

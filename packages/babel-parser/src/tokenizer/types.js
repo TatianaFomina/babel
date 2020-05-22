@@ -114,6 +114,7 @@ export const types: { [name: string]: TokenType } = {
   arrow: new TokenType("=>", { beforeExpr }),
   template: new TokenType("template"),
   ellipsis: new TokenType("...", { beforeExpr }),
+  ellipsisDollar: new TokenType("...$", { beforeExpr }),
   backQuote: new TokenType("`", { startsExpr }),
   dollarBraceL: new TokenType("${", { beforeExpr, startsExpr }),
   at: new TokenType("@"),
